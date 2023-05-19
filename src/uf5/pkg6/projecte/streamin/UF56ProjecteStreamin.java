@@ -6,13 +6,9 @@ import uf5.pkg6.projecte.basedades.ConexioBDSingleton;
 
 public class UF56ProjecteStreamin extends Application{
 
-    public static void main(String[] args){
-        
+    public static void main(String[] args){  
         ConexioBDSingleton.getConnection();
-        
-        
         Application.launch(args);
-        
     }
 
     @Override

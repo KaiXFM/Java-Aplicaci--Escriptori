@@ -18,8 +18,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import static uf5.pkg6.projecte.streamin.vista.GestioProduccionsVista.centerGestioProduccio;
-
+/**
+ * Classe AplicacioVista que representa l'aplicació de gestió de streaming amb interfície gràfica.
+ */
 public class AplicacioVista {
+    /**
+     * Mètode que inicialitza l'aplicació JavaFX.
+     *
+     * @param escenari l'escenari principal de l'aplicació
+     * @throws Exception si es produeix un error durant l'execució
+     */
     public void start(Stage escenari) throws Exception{  
     
         BorderPane bp = new BorderPane();
@@ -49,7 +57,11 @@ public class AplicacioVista {
     
     
     }
-    
+    /**
+     * Mètode que retorna la capçalera de la interfície.
+     *
+     * @return una instància de HBox que representa la capçalera
+     */
      private HBox top() {
         HBox hb = new HBox();
         
@@ -71,7 +83,11 @@ public class AplicacioVista {
 
         return hb;
     }
-    
+    /**
+     * Mètode que retorna el panell esquerre de la interfície.
+     *
+     * @return una instància de VBox que representa el panell esquerre
+     */
     private VBox left(){
         
         BorderPane bp = new BorderPane();

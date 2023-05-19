@@ -15,7 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import static uf5.pkg6.projecte.streamin.vista.AlertVista.alertWarning;
-
+/**
+ * Classe GestioProduccionsVista que representa la interfície gràfica per a la gestió de produccions.
+ */
 public class GestioProduccionsVista {
     
         static Label lblId;
@@ -41,7 +43,11 @@ public class GestioProduccionsVista {
         
         static Label lblFavorit;
         static TextField txtFavorit;
-        
+     /**
+     * Mètode per a obtenir la part central de la interfície per a la gestió de produccions.
+     *
+     * @return una instància de VBox que representa la part central de la interfície
+     */   
     public static VBox centerGestioProduccio(){
         
         VBox vb = new VBox();
@@ -194,7 +200,9 @@ public class GestioProduccionsVista {
     private static void modificaProduccio() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    /**
+     * Mètode per a inicialitzar els camps de la pantalla de gestió de produccions.
+     */
     static void inicialitzarCampsPantallaProduccio() {
         
         txtId.setText("");

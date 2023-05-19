@@ -3,6 +3,11 @@ package uf5.pkg6.projecte.streamin.model;
 
 import java.util.ArrayList;
 
+/**
+ * Classe Pelicula que hereta de Produccio.
+ * 
+ * Classe que representa una pel·lícula.
+ */
 public class Pelicula extends Produccio{
     private double durada;
     

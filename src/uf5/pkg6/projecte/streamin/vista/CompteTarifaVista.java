@@ -5,11 +5,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
+/**
+ * Classe CompteTarifaVista que representa la visualització dels contractes de tarifa en una interfície gràfica.
+ */
 public class CompteTarifaVista {
     
     private TableView tblContactes;
-    
+     /**
+     * Mètode per visualitzar els contractes de tarifa.
+     *
+     * @return una instància de VBox que conté la visualització dels contractes de tarifa
+     */
     public VBox visualitzarContractesTarifa(){
         
         System.out.println("visualitzarContractesTarifa");

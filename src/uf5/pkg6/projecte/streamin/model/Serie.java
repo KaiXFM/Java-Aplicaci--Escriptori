@@ -2,7 +2,11 @@
 package uf5.pkg6.projecte.streamin.model;
 
 import java.util.ArrayList;
-
+/**
+ * Classe Serie que hereta de Produccio.
+ * 
+ * Classe que representa una sèrie de televisió.
+ */
 public class Serie extends Produccio{
     
     private int numCapitols;

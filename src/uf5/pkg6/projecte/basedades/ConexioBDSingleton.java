@@ -7,7 +7,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
- 
+ /**
+  * ConexioBDSingleton serveix per a crear un connexió a BD local a partir de lest teves dades en les variables privades
+  * @author AX
+  */
 public class ConexioBDSingleton{
     
     private static Connection conn = null;
@@ -17,6 +20,10 @@ public class ConexioBDSingleton{
     private static String user = "root";
     private static String pwd = "root";
     
+    /**
+     * 
+     * @return Crea la conexió a la base de dades
+     */
     public static Connection getConnection(){
         
         try{

@@ -5,7 +5,10 @@ import uf5.pkg6.projecte.streamin.model.Pelicula;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * 
+ * @author AX La classe Pelicula DAO serveix per accedir a la taula Pelicula i seleccionar els seus atributs
+ */
 public class PeliculaDAO {
     
     public Pelicula consultaPeliculaBD(int id){
@@ -29,7 +32,12 @@ public class PeliculaDAO {
         }
         return p;
 }
-
+/**
+ * Per retornar dades de la Pel·licula
+ * @param id id de la peli
+ * @param durada durada de la peli
+ * @return retorna peli amb durada,categoria,director i actor
+ */
     private Pelicula dadesBDPelicula(int id, double durada) {
         Pelicula p = new Pelicula();
         
@@ -42,7 +50,11 @@ public class PeliculaDAO {
         return p;
     }
 
-
+/**
+ * Fa un select el qual agafa el num del director
+ * @param idProduccio Accedir al mètode sabent la id de la peli
+ * @return Obté el Director
+ */
     private String obtenirDirector(int idProduccio){
     
         Connection con = ConexioBDSingleton.getConnection();
@@ -66,12 +78,16 @@ public class PeliculaDAO {
     return director;
 
 }
-    
+    /**
+    * Fa un select el qual agafa el nom de la Categoría
+    * @param idProduccio Accedir al mètode sabent la id de la peli
+    * @return Obté la Categoría
+    */
     private String obtenirCategoria(int idProduccio){
     
         Connection con = ConexioBDSingleton.getConnection();
         
-        String director = " ";
+        String categoria = " ";
         
         String senteciaSql = "SELECT d.nom FROM genere dp, categoria d"
                 + "WHERE dp.id_categoria = ? AND dp.id_categoria = d.id_categoria";
@@ -87,15 +103,19 @@ public class PeliculaDAO {
             Logger.getLogger(PeliculaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    return director;
+    return categoria;
 
 }
-    
+     /**
+     * Fa un select el qual agafa el nom del Actor
+     * @param idProduccio Accedir al mètode sabent la id de la peli
+     * @return Obté Actor
+     */
     private String obtenirActor(int idProduccio){
     
         Connection con = ConexioBDSingleton.getConnection();
         
-        String director = " ";
+        String actor = " ";
         
         String senteciaSql = "SELECT d.nom_actor FROM actors dp, actor d"
                 + "WHERE dp.id_actor = ? AND dp.id_actor = d.id_actor";
@@ -111,7 +131,7 @@ public class PeliculaDAO {
             Logger.getLogger(PeliculaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    return director;
+    return actor;
 
 }
     
