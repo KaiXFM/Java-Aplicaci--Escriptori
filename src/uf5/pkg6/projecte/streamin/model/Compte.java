@@ -1,0 +1,13 @@
+
+package uf5.pkg6.projecte.streamin.model;
+
+import java.time.LocalDate;
+
+public class Compte {
+    
+    private int idCompte;
+    private String usuari;
+    private String contrassenya;
+    private LocalDate dataAlta;
+    
+}
