@@ -11,6 +11,14 @@ public class Serie extends Produccio{
     
     private int numCapitols;
     private double duradaTotal;
+
+    public void setNumCapitols(int numCapitols) {
+        this.numCapitols = numCapitols;
+    }
+
+    public void setDuradaTotal(double duradaTotal) {
+        this.duradaTotal = duradaTotal;
+    }
     
     private ArrayList<String> categories;
     private ArrayList<String> directors;
@@ -51,6 +59,28 @@ public class Serie extends Produccio{
             return this.directors.get(pos);
         }
         return "";
+    }
+    
+    public String getCategoria(int pos){
+        if (pos<=categories.size()-1) {
+            return this.categories.get(pos);
+        }
+        return "";
+    }
+    
+    public String getActor(int pos){
+        if (pos<=actors.size()-1) {
+            return this.actors.get(pos);
+        }
+        return "";
+    }
+
+    public int getNumCapitols() {
+        return numCapitols;
+    }
+
+    public double getDuradaTotal() {
+        return duradaTotal;
     }
 
     

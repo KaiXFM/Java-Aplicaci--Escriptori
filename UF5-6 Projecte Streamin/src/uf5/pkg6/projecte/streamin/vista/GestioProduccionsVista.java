@@ -3,6 +3,7 @@ package uf5.pkg6.projecte.streamin.vista;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +15,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import uf5.pkg6.projecte.basedades.PeliculaDAO;
+import uf5.pkg6.projecte.basedades.ProduccioDAO;
+import uf5.pkg6.projecte.basedades.SerieDAO;
+import uf5.pkg6.projecte.streamin.model.Pelicula;
+import uf5.pkg6.projecte.streamin.model.Produccio;
+import uf5.pkg6.projecte.streamin.model.Serie;
+import static uf5.pkg6.projecte.streamin.vista.AlertVista.alertInformacio;
 import static uf5.pkg6.projecte.streamin.vista.AlertVista.alertWarning;
 /**
  * Classe GestioProduccionsVista que representa la interfície gràfica per a la gestió de produccions.
@@ -23,8 +31,8 @@ public class GestioProduccionsVista {
         static Label lblId;
         static TextField txtId;
         
-        static Label lblNom = new Label("Nom: ");
-        static TextField txtNom = new TextField();
+        static Label lblNom;
+        static TextField txtNom;
         
         static Label lblAny;
         static TextField txtAny;
@@ -43,6 +51,18 @@ public class GestioProduccionsVista {
         
         static Label lblFavorit;
         static TextField txtFavorit;
+        
+        static Label lblDurada = new Label("Durada");
+        static TextField txtDurada = new TextField();
+        
+        static Label lblNumCapitols = new Label("Numero Capitols");
+        static TextField txtNumCapitols = new TextField();
+        
+        static Label lblDuradaTotal = new Label("Durada Total");
+        static TextField txtDuradaTotal = new TextField();
+        
+        static RadioButton rb1 = new RadioButton("Pel·licula");
+        static RadioButton rb2 = new RadioButton("Serie");
      /**
      * Mètode per a obtenir la part central de la interfície per a la gestió de produccions.
      *
@@ -101,10 +121,7 @@ public class GestioProduccionsVista {
         
         lblFavorit = new Label("Favorit: ");
         txtFavorit = new TextField();
-        
-        RadioButton rb1 = new RadioButton("Pel·licula");
-        RadioButton rb2 = new RadioButton("Serie");
-        
+
         ToggleGroup tg = new ToggleGroup();
         
         rb1.setToggleGroup(tg);
@@ -144,8 +161,33 @@ public class GestioProduccionsVista {
         gp.setHgap(10);
         gp.setVgap(10);
         
+        GridPane gpps = new GridPane();
+        
+        lblDurada.setVisible(false);
+        txtDurada.setVisible(false);
+        
+        lblNumCapitols.setVisible(false);
+        txtNumCapitols.setVisible(false);
+        
+        lblDuradaTotal.setVisible(false);
+        txtDuradaTotal.setVisible(false);
+        
+        gpps.add(lblDurada, 0, 0,1,1);
+        gpps.add(txtDurada, 1, 0,1,1);
+        
+        gpps.add(lblNumCapitols, 0, 1,1,1);
+        gpps.add(txtNumCapitols, 1, 1,1,1);
+        
+        gpps.add(lblDuradaTotal, 0, 2,1,1);
+        gpps.add(txtDuradaTotal, 1, 2,1,1);
+        
+        gpps.setHgap(10);
+        gpps.setVgap(10);
+        
+        gpps.setPadding(new Insets(20,20,20,20));
+        
         vb.setSpacing(20);
-        vb.getChildren().add(gp);
+        vb.getChildren().addAll(gp, gpps);
         vb.setAlignment(Pos.CENTER);
         
         return vb;
@@ -190,6 +232,31 @@ public class GestioProduccionsVista {
             alertWarning("L'identificador ha de tenir un valor");
         } else{
             int id = Integer.parseInt(txtId.getText());
+            
+            inicialitzarCampsPantallaProduccio();
+            
+            ProduccioDAO prodDAO = new ProduccioDAO();
+            
+            Produccio produccio = prodDAO.consultaProduccioBD(id);
+            
+            if (produccio == null) {
+                alertInformacio("No existeix aquest identificador de produccio");
+            } else {
+                dadesProduccioAPantalla(produccio);
+                
+                PeliculaDAO peliDAO = new PeliculaDAO();
+                Pelicula peli = peliDAO.consultaPeliculaBD(id);
+                
+                if (peli != null) {
+                    dadesPeliculaAPantalla(peli);
+                } else {
+                    SerieDAO serieDAO = new SerieDAO();
+                    Serie serie = serieDAO.consultaSerieBD(id);
+                    if (serie != null) {
+                        dadesSerieAPantalla(serie);
+                    }
+                }
+            }
         }
     }
     
@@ -204,9 +271,64 @@ public class GestioProduccionsVista {
      * Mètode per a inicialitzar els camps de la pantalla de gestió de produccions.
      */
     static void inicialitzarCampsPantallaProduccio() {
-        
         txtId.setText("");
+        txtNom.setText("");
+        txtAny.setText("");
+        txtCategoria.setText("");
+        txtDirector.setText("");
+        txtActor.setText("");
+        txtNacionalitat.setText("");
+        txtFavorit.setText("");
         
+        rb1.setSelected(false);
+        rb2.setSelected(false);
+        
+        lblDurada.setVisible(false);
+        txtDurada.setVisible(false);
+        
+        lblDuradaTotal.setVisible(false);
+        txtDuradaTotal.setVisible(false);
+        
+        lblNumCapitols.setVisible(false);
+        txtNumCapitols.setVisible(false);
+    }
+    
+    private static void dadesProduccioAPantalla(Produccio p){
+    
+    txtId.setText(String.valueOf(p.getId()));
+    txtNom.setText(p.getNom());
+    txtNacionalitat.setText(p.getNacionalitat());
+    txtAny.setText(String.valueOf(p.getAny()));
+    txtFavorit.setText(String.valueOf(p.getPreferit()));
+    
+    }
+    
+    private static void dadesPeliculaAPantalla(Pelicula p){
+        
+        rb1.setSelected(true);
+        
+        txtDurada.setText(String.valueOf(p.getDurada()));
+        
+        txtCategoria.setText(p.getCategoria(0));
+        txtDirector.setText(p.getDirector(0));
+        txtActor.setText(p.getActor(0));
+        
+        txtDurada.setVisible(true);
+    }
+    
+    private static void dadesSerieAPantalla(Serie s){
+        
+        rb2.setSelected(true);
+        
+        txtDuradaTotal.setText(String.valueOf(s.getDuradaTotal()));
+        txtNumCapitols.setText(String.valueOf(s.getNumCapitols()));
+        
+        txtCategoria.setText(s.getCategoria(0));
+        txtDirector.setText(s.getDirector(0));
+        txtActor.setText(s.getActor(0));
+        
+        txtDurada.setVisible(true);
+        txtNumCapitols.setVisible(true);
     }
     
 }

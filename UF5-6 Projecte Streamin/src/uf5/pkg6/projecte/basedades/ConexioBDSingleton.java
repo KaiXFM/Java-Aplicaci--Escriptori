@@ -28,7 +28,8 @@ public class ConexioBDSingleton{
         
         try{
             if (conn == null) {
-               Class.forName("com.mysql.cj.jbdc.Driver");
+                String driverPath = "C:/Users/arnba/Downloads/mysql-connector-java-5.1.48-bin.jar";
+                Class.forName("com.mysql.cj.jbdc.Driver");
                 conn = DriverManager.getConnection(url + bbdd, user,pwd); 
             }
         }catch(ClassNotFoundException a){
